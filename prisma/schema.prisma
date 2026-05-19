@@ -32,7 +32,7 @@ model User{
   deliveries Delivery[]
 
   createdAt DateTime @default(now())@map("created_at")
-  updatedAt DateTime? @default(now())@map("updated_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
 
   @@map("users")
 }
@@ -48,7 +48,7 @@ model Delivery{
   logs DeliveryLog[]
 
   createdAt DateTime @default(now())@map("created_at")
-  updatedAt DateTime? @default(now())@map("updated_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
 
 
   @@map("deliveries")
@@ -62,7 +62,7 @@ model DeliveryLog{
   delivery Delivery @relation(fields:[deliveryId], references: [id])
 
   createdAt DateTime @default(now())@map("created_at")
-  updatedAt DateTime? @default(now())@map("updated_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
 
   @@map("delivery_logs")
 }
