@@ -6,6 +6,13 @@ import { deliveryLogsRoutes } from "./delivery-logs-routes";
 
 export const routes = Router();
 
+routes.get("/", (request, response) => {
+  return response.status(200).json({
+    status: "online",
+    message: "API Delivery funcionando",
+  });
+});
+
 routes.use("/users", usersRoutes);
 routes.use("/sessions", sessionRoutes);
 routes.use("/deliveries", deliveriesRoutes);
