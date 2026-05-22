@@ -17,15 +17,15 @@ export class DeliveryLogsController {
     });
 
     if (!delivery) {
-      throw new AppError("delivery not found", 401);
+      throw new AppError("delivery not found", 404);
     }
 
     if (delivery.status === "delivered") {
-      throw new AppError("this order has already been delivered", 401);
+      throw new AppError("this order has already been delivered", 409);
     }
 
     if (delivery.status === "processing") {
-      throw new AppError("change status to shipped", 401);
+      throw new AppError("change status to shipped", 409);
     }
 
     await prisma.deliveryLog.create({
@@ -53,11 +53,15 @@ export class DeliveryLogsController {
       },
     });
 
+    if (!delivery) {
+      throw new AppError("delivery not found", 404);
+    }
+
     if (
       request.user?.role === "customer" &&
       request.user.id !== delivery?.userId
     ) {
-      throw new AppError("the user can only view their deliveries", 401);
+      throw new AppError("the user can only view their deliveries", 403);
     }
 
     return response.json(delivery);
