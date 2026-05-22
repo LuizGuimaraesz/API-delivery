@@ -9,7 +9,7 @@ export const routes = Router();
 routes.get("/", (request, response) => {
   return response.status(200).json({
     status: "online",
-    message: "API Delivery funcionando",
+    message: "API Delivery no ar!",
   });
 });
 
